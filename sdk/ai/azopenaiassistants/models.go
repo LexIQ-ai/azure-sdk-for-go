@@ -1291,7 +1291,22 @@ type RunStepDeltaFileSearchToolCall struct {
 	Type *string
 
 	// Reserved for future use.
-	FileSearch map[string]*string
+	FileSearch *FileSearch
+}
+
+type FileSearch struct {
+	RankingOption *RankingOption
+	Results []FileSearchResult
+}
+
+type RankingOption struct {
+	Ranker *string
+	ScoreThreshold *float64
+}
+
+type FileSearchResult struct {
+	FileID *string
+	Score *float64
 }
 
 // GetRunStepDeltaToolCall implements the RunStepDeltaToolCallClassification interface for type RunStepDeltaFileSearchToolCall.
@@ -1415,7 +1430,7 @@ type RunStepError struct {
 // that represents executed file search.
 type RunStepFileSearchToolCall struct {
 	// REQUIRED; Reserved for future use.
-	FileSearch map[string]*string
+	FileSearch *FileSearch
 
 	// REQUIRED; The ID of the tool call. This ID must be referenced when you submit tool outputs.
 	ID *string
